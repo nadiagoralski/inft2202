@@ -17,7 +17,9 @@
             <!-- inline CSS uses the style attribute style="background:#c00;padding:10px;" -->
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/">About</a></li>
+                <!-- inline JavaScript uses attributes; not the best approach -->
+                <!-- <li><a href="/" onclick="myFunction()">About</a></li> -->
+                <li><a href="/" id="about">About</a></li>
                 <li><a href="/">Products</a></li>
                 <li><a href="/">Services</a></li>
                 <li><a href="/">Contact</a></li>
@@ -34,4 +36,24 @@
             <p>&copy; 2024 Awesome Site</p>
         </footer>
     </body>
+
+    <!-- JavaScript section -->
+    <!-- embedded for example purposes only -->    
+    <script>
+        // embedded JavaScript
+
+        // define myFunction
+         function myFunction() {
+             alert('this is the about link');
+         }
+        
+        // define variable to reference about link
+        var aboutLink = document.getElementById("about");
+        // setting up event listener
+        // in this case, the "click" event
+        aboutLink.addEventListener("click", myFunction, false);
+
+    </script>
+
+
 </html>
