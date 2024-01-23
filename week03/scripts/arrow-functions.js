@@ -32,7 +32,9 @@ const author = {
   books: [],
   printBooks() {
     // loop through and print all book names with author's fullName
-    this.books.forEach(aBookName => console.log(`${aBookName} by ${this.fullName}`));
+    this.books.forEach((aBookName) =>
+      console.log(`${aBookName} by ${this.fullName}`)
+    );
   },
 };
 // console.log(author);
@@ -42,3 +44,35 @@ author.books.push("My Book 2");
 author.books.push("My Book 3");
 // console.log(author);
 author.printBooks();
+
+
+function iterateVar() {
+  for (var i = 0; i < 10; i++) {
+    console.log(i);
+  }
+  console.log(i); // 10; 'var i' exists outside after creation
+}
+
+
+function iterateLet() {
+  for (let i = 0; i < 10; i++) {
+    console.log(i);
+  }
+    //   console.log(i); // Uncaught ReferenceError; 'let i' does not exist outside for block
+}
+
+console.log(iterateVar());
+console.log(iterateLet());
+
+var myVar = 1;
+let myLet = 2;
+const myConst = 3;
+console.log(myVar, myLet, myConst); // 1, 2, 3
+
+myVar = 4;
+myLet = 5;
+console.log(myVar, myLet); // 4, 5
+// myConst = 6; // creates error, code will not execute further
+// console.log(myConst);
+
+
