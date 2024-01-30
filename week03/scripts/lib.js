@@ -5,7 +5,7 @@
  * @param {*} x
  * @returns
  */
-export function halfOf(x) {
+export function halfOf(x = 40) {
   return x / 2;
 }
 
