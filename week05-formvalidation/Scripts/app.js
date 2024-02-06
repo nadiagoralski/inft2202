@@ -122,7 +122,7 @@ let app;
 
     // Email Address
     $("#emailAddress").blur((e) => {
-      validateInput("#emailAddress", ($("#emailAddress").val().length < 8 || (!$("#emailAddress").include("@"))), "Invalid Email Address");
+      validateInput("#emailAddress",($("#emailAddress").val().length < 8) || (!$("#emailAddress").val().includes("@")),"Invalid Email Address");
     });
 
     $("#emailAddress").focus((e) => {
