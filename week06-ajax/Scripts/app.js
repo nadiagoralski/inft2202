@@ -115,15 +115,15 @@ let app;
           // create rows for each product
           let newRowContent = '';
           products.forEach(item => {
-            newRowContent += `<tr>`
             rowCounter += 1;
-            newRowContent += `<th scope="row">${rowCounter}</th>`;
-            newRowContent += `<td>${item.productID}</td>`;
-            newRowContent += `<td>${item.productName}</td>`;
-            newRowContent += `<td>${item.developer}</td>`;
-            newRowContent += `<td>${item.description}</td>`;
-            newRowContent += `<td>${item.price}</td>`;
-            newRowContent += '</tr>';
+            newRowContent += `<tr>` +
+            `<th scope="row">${rowCounter}</th>` +
+            `<td>${item.productID}</td>` +
+            `<td>${item.productName}</td>` +
+            `<td>${item.developer}</td>` +
+            `<td>${item.description}</td>` +
+            `<td>${item.price}</td>` +
+            '</tr>';
           });
          
           // append data to tbody of products table
