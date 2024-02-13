@@ -12,6 +12,17 @@ class Contact {
   }
 }
 
+
+class Item {
+  constructor(productID, productName, developer, description, price) {
+    this.productID = productID;
+    this.productName = productName;
+    this.developer = developer;
+    this.description = description;
+    this.price = price;
+  }
+}
+
 ("use strict");
 //IIFE - Immediately Invoked Function Expression
 // mean? -> anonymous self-executing function
@@ -71,7 +82,65 @@ let app;
     });
   }
 
-  function DisplayProductsContent() {}
+  /**
+   * Display product content, loading in from products.json
+   */
+  function DisplayProductsContent() {
+    document.title = "INFT2202 - Products";
+    let products = [];
+
+    // 1) CREATE A TRY / CATCH FOR EXCEPTION HANDLING
+    try {
+      // 2. INSTANTIATE A NEW XHR OBJECT
+      const xhr = new XMLHttpRequest();
+
+      // 3. ADD EVENT LISTENER FOR "readystatechange"
+      xhr.onreadystatechange = () => {
+        // CHECK READYSTATE AND STATUS
+        // make sure it is DONE (4) and was SUCCESSful (200)
+        if ((xhr.readyState === XMLHttpRequest.DONE) && (xhr.status === 200)) {
+          // 6. GET A RESPONSE FROM THE SERVER
+          // console.log('responseText=', xhr.responseText);
+          let data = JSON.parse(xhr.responseText);
+          // console.log(data);
+
+          // for each item in the products array
+          data.products.forEach(item => {
+      
+            products.push(new Item(item.productID, item.productName, item.developer, item.description, item.price))
+          });
+
+          // row counter for first column
+          let rowCounter = 0;
+          // create rows for each product
+          let newRowContent = '';
+          products.forEach(item => {
+            newRowContent += `<tr>`
+            rowCounter += 1;
+            newRowContent += `<th scope="row">${rowCounter}</th>`;
+            newRowContent += `<td>${item.productID}</td>`;
+            newRowContent += `<td>${item.productName}</td>`;
+            newRowContent += `<td>${item.developer}</td>`;
+            newRowContent += `<td>${item.description}</td>`;
+            newRowContent += `<td>${item.price}</td>`;
+            newRowContent += '</tr>';
+          });
+         
+          // append data to tbody of products table
+          $('#productsTable tbody').append(newRowContent);
+        }
+      };
+
+      // 4. OPEN A CHANNEL - MAKE A REQUEST WITH THE APPROPRIATE URL
+      xhr.open("GET", "./data/products.json", true);
+
+      // 5. send
+      xhr.send();
+    } catch(error){
+      console.log(`products.html Error: ${error}`);
+    }
+
+  }
 
   function DisplayServicesContent() {}
 
