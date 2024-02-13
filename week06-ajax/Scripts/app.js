@@ -107,7 +107,7 @@ let app;
           // for each item in the products array
           data.products.forEach(item => {
       
-            products.push(new Item(item.productID, item.productName, item.developer, item.description, item.price))
+            products.push(new Item(item.productID, item.productName, item.developer, item.description, item.price));
           });
 
           // row counter for first column
@@ -134,10 +134,11 @@ let app;
       // 4. OPEN A CHANNEL - MAKE A REQUEST WITH THE APPROPRIATE URL
       xhr.open("GET", "./data/products.json", true);
 
-      // 5. send
+      // 5. SEND THE REQUEST TO THE SERVER
       xhr.send();
     } catch(error){
-      console.log(`products.html Error: ${error}`);
+      // catch error, log to console.
+      console.log(`Error: ${error}`);
     }
 
   }
