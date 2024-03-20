@@ -1,7 +1,7 @@
 const path = require('path');
 
 /**
- * render home.pug view
+ * render index.pug view
  * @param {*} req 
  * @param {*} res 
  */
