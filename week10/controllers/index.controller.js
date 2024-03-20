@@ -1,5 +1,3 @@
-const path = require('path');
-
 /**
  * render index.pug view
  * @param {*} req 
