@@ -3,6 +3,8 @@ const pug = require('pug');
 
 require('dotenv').config();
 
+// routes
+const index = require('./routes/index.router');
 
 // use port from env or default to 3000 if not set
 const PORT = process.env.PORT || 3000;
@@ -10,17 +12,12 @@ const PORT = process.env.PORT || 3000;
 // initialize method
 const app = express();
 
+// configure express routes
+app.use('/', index);
+
 // setup template engine
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
-
-app.get("/", function(req, res) {
-    res.render("index", {
-        title: 'INFT 2202 - Pug Templates',
-        message: 'Welcome Nadia!'
-    });
-})
-
 
 
 app.listen(PORT, () => {
