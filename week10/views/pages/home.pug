@@ -2,3 +2,7 @@ extends ../index
 block content
     p homePageParagraph
     p You can have more elements/content specific to the home page here
+    if showGreenHeader
+        h2.green Header Green
+    else
+        h2.blue Header Blue

@@ -5,10 +5,12 @@
  */
 function homeView(req, res) {
    // render index.pug in views
+
     res.render('./pages/home', {
         title: "INFT2202 Node101 - MVC101 with Pug templates",
         message: "Welcome to my site.",
-        homePageParagraph: "Here is something interesting bout my site"
+        homePageParagraph: "Here is something interesting bout my site",
+        showGreenHeader: false
     });
 }
 

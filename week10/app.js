@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 // initialize method
 const app = express();
 
+// configure to use static files, i.e. our stylesheet
+app.use(express.static(__dirname + '/public'))
+
 // configure express routes
 app.use('/', index);
 
