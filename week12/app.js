@@ -16,11 +16,11 @@ app.use('/', student);
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
-// app.get('/', (req, res) => {
-//     res.render('./pages/home', {
-//         pageTitle: "INFT 2202 - Home"
-//     })
-// });
+app.get('/', (req, res) => {
+    res.render('./pages/home', {
+        pageTitle: "INFT 2202 - Home"
+    })
+});
 
 // Listent on port
 app.listen(3000, () => {
