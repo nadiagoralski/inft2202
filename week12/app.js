@@ -1,6 +1,7 @@
 const express = require('express');
 const pug = require('pug');
 const student = require('./routes/student.route');
+const user = require('./routes/user.route');
 require('dotenv').config();
 
 // intialize method
@@ -8,18 +9,20 @@ const app = express();
 // use port from env or default to 3000 if not set
 const PORT = process.env.PORT || 3000;
 
+app.use(express.urlencoded({extended: false}));
 // configure routes
 app.use('/', student);
+app.use('/', user);
 
 // setup template engine
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
-app.get('/', (req, res) => {
-    res.render('./pages/home', {
-        pageTitle: "INFT 2202 - Home"
-    })
-});
+// app.get('/', (req, res) => {
+//     res.render('./pages/home', {
+//         pageTitle: "INFT 2202 - Home"
+//     })
+// });
 
 // Listent on port
 app.listen(3000, () => {

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/college');
+mongoose.connect(process.env.DB_URL);
 
 // mongoose.set('useCreateIndex', true);
 
