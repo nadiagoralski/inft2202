@@ -1,7 +1,6 @@
 const express = require('express');
 const pug = require('pug');
 const student = require('./routes/student.route');
-const user = require('./routes/user.route');
 require('dotenv').config();
 
 // intialize method
@@ -12,7 +11,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({extended: false}));
 // configure routes
 app.use('/', student);
-app.use('/', user);
 
 // setup template engine
 app.set("views", `${__dirname}/views`);

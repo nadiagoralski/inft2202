@@ -10,3 +10,16 @@ block content
                 td=student.studentId   
                 td=student.firstName   
                 td=student.lastName   
+
+    h2 Add/Edit Student
+    form(method='post', action='/addEditStudent')
+        label.form-label(for="studentId") Student ID:
+        input.form-control(type="text", name="studentId", id="studentId")
+        br
+        label.form-label(for="firstName") First Name:
+        input.form-control(type="text", name="firstName", id="firstName")
+        br
+        label.form-label(for="lastName") Last Name:
+        input.form-control(type="text", name="lastName", id="lastName")
+        br
+        input.btn.btn-primary(type="submit", value="Add New")                
