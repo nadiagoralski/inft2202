@@ -102,9 +102,7 @@ const getLoginSuccess = (req, res) => {
  * @param {*} nex
  */
 exports.postLogin = (req, res, next) => {
-  let usernameEntry = req.body.username;
-  let passwordEntry = req.body.password;
-
+  // user passport to authenticate
   passport.authenticate("local", function (err, user, info) {
     if (err) {
       renderLogin(req, res, { errorMessage: err });
