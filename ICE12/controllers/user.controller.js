@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 const saltRounds = 12;
 const MIN_PASSWORD_LENGTH = 8;
 const MIN_USERNAME_LENGTH = 5;
@@ -19,26 +20,26 @@ async function userExists(usernameToFind) {
 
 /**
  * Renders the login page with
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  * @param {*} returnObj Object that may contain messages to display
  */
 function renderLogin(req, res, returnObj) {
   const errorMessage = returnObj?.errorMessage || "";
   const successMessage = returnObj?.successMessage || "";
-  
+
   res.render("login", {
     pageTitle: "Login",
     errorMessage: errorMessage,
-    successMessage: successMessage
+    successMessage: successMessage,
   });
 }
 
 /**
  * Render the register page
- * @param {*} req 
- * @param {*} res 
- * @param {*} errorMessage 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} errorMessage
  */
 function renderRegister(req, res, errorMessage = "") {
   res.render("register", {
@@ -75,7 +76,10 @@ exports.getLogin = (req, res, next) => {
  * @param {*} next
  */
 const getLoginFailure = (req, res) => {
-  renderLogin(req, res, { errorMessage: "Username/password combination does not exist. Please try again."})
+  renderLogin(req, res, {
+    errorMessage:
+      "Username/password combination does not exist. Please try again.",
+  });
 };
 
 /**
@@ -97,43 +101,37 @@ const getLoginSuccess = (req, res) => {
  * @param {*} res
  * @param {*} nex
  */
-exports.postLogin = (req, res) => {
+exports.postLogin = (req, res, next) => {
   let usernameEntry = req.body.username;
   let passwordEntry = req.body.password;
-  // check to see if user pass combo exists
-  // render either login-failure or login-success
-  // check against DB instead of hardcoded values
 
-  userExists(usernameEntry).then(function (user) {
-    if (user) {
-      // username match
-      // check password hash
-      bcrypt.compare(passwordEntry, user.hashPassword, function (err, result) {
-        if (err == null && result) {
-          // correct password
-          getLoginSuccess(req, res);
-        } else {
-          // either an error or incorrect password entry
-          getLoginFailure(req, res);
-        }
-      });
-    } else {
-      // username not found
-      // show error
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      renderLogin(req, res, { errorMessage: err });
+    }
+
+    if (!user) {
       getLoginFailure(req, res);
     }
-  });
-};
 
+    req.logIn(user, function (err) {
+      if (err) {
+        renderLogin(req, res, { errorMessage: err });
+      }
+
+      getLoginSuccess(req, res);
+    });
+  })(req, res, next);
+};
 
 /**
  * render logout
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
 exports.getLogout = (req, res) => {
-  renderLogin(req, res, { successMessage: "Successfully logged out."});
-}
+  renderLogin(req, res, { successMessage: "Successfully logged out." });
+};
 
 /**
  * render the register page
