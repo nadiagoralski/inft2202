@@ -20,7 +20,7 @@ const MONGO_STRING = process.env.DB_STRING;
 mongoose
   .connect(MONGO_STRING)
   .then(console.log(`MongoDB connected ${MONGO_STRING}`))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log('MongoDB ERROR', err));
 
 app.use(express.urlencoded({ extended: false }));
 

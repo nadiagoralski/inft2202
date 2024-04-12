@@ -32,6 +32,8 @@ function renderLogin(req, res, returnObj) {
     pageTitle: "Login",
     errorMessage: errorMessage,
     successMessage: successMessage,
+    user: { username: req.session?.passport?.user },
+    isLoggedIn: !!req.session?.passport?.user
   });
 }
 
@@ -45,6 +47,8 @@ function renderRegister(req, res, errorMessage = "") {
   res.render("register", {
     pageTitle: "Register a New Account",
     errorMessage: errorMessage,
+    user: { username: req.session?.passport?.user },
+    isLoggedIn: !!req.session?.passport?.user
   });
 }
 
@@ -54,8 +58,11 @@ function renderRegister(req, res, errorMessage = "") {
  * @param {*} res
  */
 exports.homeView = (req, res) => {
+  console.log("--homeview", req.session, req.session?.passport)
   res.render("home", {
     pageTitle: "INFT 2202 - Home Page",
+    user: { username: req.session?.passport?.user },
+    isLoggedIn: !!req.session?.passport?.user
   });
 };
 
@@ -89,9 +96,12 @@ const getLoginFailure = (req, res) => {
  * @param {*} next
  */
 const getLoginSuccess = (req, res) => {
+  console.log('----getLoginSuccess',req.session, !!req.session?.passport?.user)
+
   res.render("login-success", {
     pageTitle: "",
     user: { username: req.body.username },
+    isLoggedIn: !!req.session?.passport?.user
   });
 };
 
